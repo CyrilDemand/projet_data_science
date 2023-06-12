@@ -1,11 +1,15 @@
-import csv as csv
+import pandas as pd
+import matplotlib.pyplot as pp
+from etape_quatre import *
+from etape_cinq import *
+
+# import du dataframe
+dataframe = pd.read_csv("../ressources/car_insurance.csv")
 
 
-print("hello world")
+# analyse des données
+etape_quatre(dataframe)
+# correction des données
+etape_cinq(dataframe)
 
-with open('../ressources/car_insurance.csv', 'r') as f:
-    # Créer un objet csv à partir du fichier
-    obj = csv.reader(f)
 
-    for ligne in obj:
-        print(ligne)
