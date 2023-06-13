@@ -11,15 +11,13 @@ def etape_six(dataframe):
 
     # les affichages suivants sont triés par corrélation, du plus corrélé au moins corrélé (en valeur absolue)
 
-    print("Corrélation entre driving_experience et outcome :",
-          dataframe['driving_experience'].corr(dataframe['outcome']))
+    print("Corrélation entre driving_experience et outcome :", dataframe['driving_experience'].corr(dataframe['outcome']))
     print("Corrélation entre age et outcome :", dataframe['age'].corr(dataframe['outcome']))
     print("Corrélation entre vehicle_ownership et outcome :", dataframe['vehicle_ownership'].corr(dataframe['outcome']))
     print("Corrélation entre past_accidents et outcome :", dataframe['past_accidents'].corr(dataframe['outcome']))
     print("Corrélation entre credit_score et outcome :", dataframe['credit_score'].corr(dataframe['outcome']))
     print("Corrélation entre vehicle_year et outcome :", dataframe['vehicle_year'].corr(dataframe['outcome']))
-    print("Corrélation entre speeding_violations et outcome :",
-          dataframe['speeding_violations'].corr(dataframe['outcome']))
+    print("Corrélation entre speeding_violations et outcome :", dataframe['speeding_violations'].corr(dataframe['outcome']))
     print("Corrélation entre children et outcome :", dataframe['children'].corr(dataframe['outcome']))
     print("Corrélation entre duis et outcome :", dataframe['duis'].corr(dataframe['outcome']))
     print("Corrélation entre annual_mileage et outcome :", dataframe['annual_mileage'].corr(dataframe['outcome']))
@@ -34,3 +32,7 @@ def etape_six(dataframe):
     # on peut visualiser ces corrélations les plus importantes avec un graphique grace à la méthode scatter_matrix()
     pd.plotting.scatter_matrix(dataframe[['driving_experience','outcome']], figsize=(8, 8))
     plt.show()
+
+    # on pourrait ici supprimer les colonnes qui n'ont presque pas d'influence sur l'outcome
+    # dataframe.drop('vehicle_type', axis=1, inplace=True)
+

@@ -3,3 +3,5 @@
 ./.idea
 .idea
 projet_data_science.iml
+./ressources/model.pickle
+./src/__pycache__
