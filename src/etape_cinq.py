@@ -1,17 +1,16 @@
 import pandas as pd
 from sklearn import preprocessing
 import matplotlib.pyplot as pp
-le = preprocessing.LabelEncoder()
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
 
 def etape_cinq(dataframe):
-
     # ========================================================================================
     # SUPPRESSION DES COLONNES INUTILES A L'ETUDE
     # ========================================================================================
 
     # Id non necessaire à l'étude, on supprime la colonne
     dataframe = dataframe.drop('id', axis=1)
-
 
     # ========================================================================================
     # CORRECTION DES DONNEES MANQUANTES
@@ -26,7 +25,6 @@ def etape_cinq(dataframe):
     # On remplace les valeurs manquantes par la mediane de toutes les valeurs
     median = dataframe['annual_mileage'].median()
     dataframe['annual_mileage'].fillna(median, inplace=True)
-
 
     # ========================================================================================
     # CORRECTION DES DONNEES ABHERENTES
@@ -44,35 +42,47 @@ def etape_cinq(dataframe):
     # seuil fixé à 30 exces de vitesse
     dataframe.loc[dataframe['speeding_violations'] > 30, 'speeding_violations'] = median
 
-
     # ========================================================================================
     # TRANSFORMATION DES DONNEES CATEGORIQUES EN DONNEES NUMERIQUES
     # ========================================================================================
 
+    # On utilise la classe LabelEncoder() de sklearn pour transformer les données catégoriques en données numériques
+    le = preprocessing.LabelEncoder()
+
     # Driving experience
-    le.fit(['0-9y','10-19y','20-29y','30y+'])
+    le.fit(['0-9y', '10-19y', '20-29y', '30y+'])
     dataframe['driving_experience'] = le.transform(dataframe['driving_experience'])
 
     # Education
-    le.fit(['none','high school','university'])
+    le.fit(['none', 'high school', 'university'])
     dataframe['education'] = le.transform(dataframe['education'])
 
     # Income
-    le.fit(['poverty','working class','middle class','upper class'])
+    le.fit(['poverty', 'working class', 'middle class', 'upper class'])
     dataframe['income'] = le.transform(dataframe['income'])
-    print(dataframe['income'])
 
     # Vehicle year
-    le.fit(['before 2015','after 2015'])
+    le.fit(['before 2015', 'after 2015'])
     dataframe['vehicle_year'] = le.transform(dataframe['vehicle_year'])
 
     # Postal code
-    le.fit(['10238','32765','92101','21217'])
+    le.fit(['10238', '32765', '92101', '21217'])
     dataframe['postal_code'] = le.transform(dataframe['postal_code'])
 
     # Vehicle type
-    le.fit(['sedan','sports car'])
+    le.fit(['sedan', 'sports car'])
     dataframe['vehicle_type'] = le.transform(dataframe['vehicle_type'])
 
+    # ========================================================================================
+    # NORMALISATION DES DONNEES
+    # ========================================================================================
 
-    # TODO : Normalisation en tableau numpy avec des valeurs entre 0 et 1
+    # On utilise la classe StandardScaler() de sklearn pour normaliser les données
+    scaler = StandardScaler()
+
+    # on exclus la colonne outcome qui ne doit pas être normalisée par elle est utilisée comme étiquette
+    columns_to_normalize = dataframe.columns.drop('outcome')
+    df_normalized = pd.DataFrame(scaler.fit_transform(dataframe[columns_to_normalize]), columns=columns_to_normalize)
+    # ne pas oublier de réinserer la colonne outcome
+    df_normalized['outcome'] = dataframe['outcome']
+    return df_normalized
