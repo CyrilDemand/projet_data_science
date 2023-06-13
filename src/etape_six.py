@@ -1,3 +1,4 @@
+
 import pandas as pd
 
 dataframe = pd.read_csv("../ressources/car_insurance.csv")
