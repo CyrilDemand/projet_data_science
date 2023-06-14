@@ -32,15 +32,15 @@ def etape_six(dataframe):
 
     # on peut visualiser ces corrélations les plus importantes avec un graphique grace à la méthode scatter_matrix()
     pd.plotting.scatter_matrix(dataframe[['driving_experience','outcome']], figsize=(8, 8))
-    # Calcul de la matrice de corrélation
-    corr_matrix = dataframe.corr()['outcome'].to_frame()
 
+    # On peut aussi calculer la matrice de corrélation
+    corr_matrix = dataframe.corr()['outcome'].to_frame()
     # Affichage de la matrice de corrélation sous forme de heatmap
     sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
     plt.title('Matrice de corrélation')
     plt.show()
 
-
     # on pourrait ici supprimer les colonnes qui n'ont presque pas d'influence sur l'outcome
+    # Cela permettrait de réduire le temps de calcul des modèles
     # dataframe.drop('vehicle_type', axis=1, inplace=True)
 

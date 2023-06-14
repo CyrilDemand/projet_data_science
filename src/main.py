@@ -74,9 +74,9 @@ print("F1-score:", f1_score(y_test, y_pred))
 # On peut améliorer l'évaluation du modèle en utilisant la validation croisée
 kfold = KFold(n_splits=5, shuffle=True, random_state=42)
 scores = cross_val_score(model, X, y, cv=kfold, scoring='accuracy')
-# précision de chaque jeu de données
+# accuracy de chaque jeu de données
 print("Scores:", scores)
-# précision moyenne sur les 5 jeux de données
+# accuracy moyenne sur les 5 jeux de données
 print("Mean Accuracy:", scores.mean())
 
 
