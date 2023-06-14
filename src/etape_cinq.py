@@ -85,4 +85,17 @@ def etape_cinq(dataframe):
     df_normalized = pd.DataFrame(scaler.fit_transform(dataframe[columns_to_normalize]), columns=columns_to_normalize)
     # ne pas oublier de réinserer la colonne outcome
     df_normalized['outcome'] = dataframe['outcome']
+
+
+    # ========================================================================================
+    # DERNIERES VERIFICATIONS
+    # ========================================================================================
+
+    # On vérifie que toutes les colonnes sont bien numériques
+    print(df_normalized.dtypes)
+
+    # on peut utiliser la fonction describe() pour vérifier que les données sont bien normalisées
+    print(df_normalized.describe())
+
+
     return df_normalized

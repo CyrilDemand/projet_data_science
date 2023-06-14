@@ -3,7 +3,9 @@ import matplotlib.pyplot as pp
 
 def etape_quatre(dataframe):
 
-    print(dataframe['postal_code'].value_counts())
+    # Comptage du nombre de valeurs total
+    print(dataframe)  # On a 10000 lignes et 18 colonnes
+
     # ========================================================================================
     # VERIFICATION DES VALEURS NULLES
     # ========================================================================================
