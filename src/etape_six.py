@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 def etape_six(dataframe):
     # on utilise la méthode corr() pour verifier la corrélation entre l'outcome et et chacuns autres colonnes
@@ -31,7 +32,14 @@ def etape_six(dataframe):
 
     # on peut visualiser ces corrélations les plus importantes avec un graphique grace à la méthode scatter_matrix()
     pd.plotting.scatter_matrix(dataframe[['driving_experience','outcome']], figsize=(8, 8))
+    # Calcul de la matrice de corrélation
+    corr_matrix = dataframe.corr()['outcome'].to_frame()
+
+    # Affichage de la matrice de corrélation sous forme de heatmap
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+    plt.title('Matrice de corrélation')
     plt.show()
+
 
     # on pourrait ici supprimer les colonnes qui n'ont presque pas d'influence sur l'outcome
     # dataframe.drop('vehicle_type', axis=1, inplace=True)

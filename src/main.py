@@ -29,7 +29,7 @@ cleaned_dataframe = etape_cinq(dataframe)
 
 
 # ETAPE 6 : recherche de corrélations
-# etape_six(cleaned_dataframe)
+etape_six(cleaned_dataframe)
 
 
 
